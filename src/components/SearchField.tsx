@@ -17,9 +17,11 @@ export const SearchField:React.FC = () :JSX.Element => {
     return (
         <div className="SearchField" >
             <TextField
+                fullWidth 
                 label={'search'}
                 value={searchInput}
                 onChange={(e)=>{dispatch(searchSlice.actions.searchChange(e.target.value))}}
+                margin="dense"
             ></TextField>
         </div>
     )

@@ -22,7 +22,7 @@ export const ListPosts:React.FC = () :JSX.Element => {
             {data.hits.map((hit)=>{
                 return(
                     <Grid item xs={3}>
-                    <Card sx={{height: 150}}>
+                    <Card sx={{height: "100%"}}>
                         <CardContent>
                             <Typography sx={{ fontSize: 14 }} color="text.secondary">
                                 {hit.title || hit.story_title || hit.story_text}
@@ -42,6 +42,7 @@ export const ListPosts:React.FC = () :JSX.Element => {
                 count = {data.nbPages}
                 page = {data.page + 1}
                 onChange = {(_, num) => { setPage(num-1) }}
+                sx={{marginY: '10px', marginX: 'auto',}}
             /> 
         </div>
     )
