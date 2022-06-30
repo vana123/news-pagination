@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import {Pagination, Card, CardContent, Button, Typography, Grid } from "@mui/material"
+import {Pagination, Card, CardContent, Button, Typography, Grid, CircularProgress, Box } from "@mui/material"
+
 import { useAppSelector } from '../hooks/redux';
 import { newsAPI } from "../service/NewsService";
 
@@ -8,12 +9,13 @@ export const ListPosts:React.FC = () :JSX.Element => {
     const [page, setPage] = useState(1)
     const {data, isError, isLoading} = newsAPI.useGetNewsQuery({query: searchValue, page: page})
 
+    
 
     if(!data){
         return(
-            <div className="ListPosts">
-                error
-            </div>
+            <Box className="ListPosts">
+                <CircularProgress disableShrink/>
+            </Box>        
         )
     }else
     return (
@@ -42,7 +44,8 @@ export const ListPosts:React.FC = () :JSX.Element => {
                 count = {data.nbPages}
                 page = {data.page + 1}
                 onChange = {(_, num) => { setPage(num-1) }}
-                sx={{marginY: '10px', marginX: 'auto',}}
+                size="large"
+                sx={{display: "flex", justifyContent: "center", marginY: '10px', marginX: 'auto',}}
             /> 
         </div>
     )
