@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container } from '@mui/material'
 
 import { NewsPage } from './page/NewsPage';
-import {NotFound} from './page/NotFound'
+import {NotFound} from './page/NotFound';
 
 export const App: React.FC = (): JSX.Element => {
   return (

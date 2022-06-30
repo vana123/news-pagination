@@ -20,6 +20,7 @@ export const searchSlice = createSlice({
         setSearchValue(state, action: PayloadAction<string>){
             if(action.payload){
                 state.searchValue = action.payload
+                state.searchInput = action.payload
             }else{
                 state.searchValue = state.searchInput
             }
