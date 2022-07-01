@@ -1,19 +1,18 @@
 import React, { useState } from "react"
 import {Pagination, Card, CardContent, Button, Typography, Grid, CircularProgress, Box, PaginationItem } from "@mui/material"
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 import { useAppSelector } from '../hooks/redux';
 import { newsAPI } from "../service/NewsService";
 
 export const ListPosts:React.FC = () :JSX.Element => {
     const {searchValue} = useAppSelector(state => state.searchReducer)
-    // const [page, setPage] = useState(1)
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const pageURL = parseInt(query.get('page') || '1', 10);
-    // const queryURL = query.get('query') || searchValue;
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const pageURL = parseInt(searchParams.get('page') || '1', 10)
+    const searchURL = searchParams.get('search') || ''
     
-    const {data, isError, isLoading} = newsAPI.useGetNewsQuery({query: searchValue, page: pageURL-1})
+    const {data, isError, isLoading} = newsAPI.useGetNewsQuery({query: searchURL, page: pageURL-1})
     
 
     if(!data){
@@ -51,7 +50,7 @@ export const ListPosts:React.FC = () :JSX.Element => {
                 renderItem={(item) => (
                     <PaginationItem
                       component={Link}
-                      to={`/?page=${item.page}`}
+                      to={`/?page=${item.page}&search=${searchURL}`}
                       {...item}
                     />
                   )}
