@@ -1,13 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import {Pagination, Card, CardContent, Button, Typography, Grid, CircularProgress, Box, PaginationItem } from "@mui/material"
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
-import { useAppSelector } from '../hooks/redux';
 import { newsAPI } from "../service/NewsService";
 
 export const ListPosts:React.FC = () :JSX.Element => {
-    const {searchValue} = useAppSelector(state => state.searchReducer)
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const pageURL = parseInt(searchParams.get('page') || '1', 10)
     const searchURL = searchParams.get('search') || ''

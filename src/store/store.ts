@@ -1,12 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 
 import { newsAPI } from '../service/NewsService';
-import { postReducer } from './reducer/post';
-import { searchReducer } from './reducer/search';
 
 const rootReducer = combineReducers({
-    postReducer,
-    searchReducer,
+    
     [newsAPI.reducerPath]: newsAPI.reducer,
 })
 

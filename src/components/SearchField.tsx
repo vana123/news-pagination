@@ -1,19 +1,16 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom";
 
 import { TextField } from '@mui/material'
-import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import { searchSlice } from '../store/reducer/search';
 import { useDebounce } from "use-debounce";
 
 export const SearchField:React.FC = () :JSX.Element => {
-    const dispatch = useAppDispatch()
-    const {searchInput} = useAppSelector(state => state.searchReducer)
     const [searchParams, setSearchParams] = useSearchParams();
-    const [value] = useDebounce(searchInput, 500)
-
     const pageURL = searchParams.get('page')
     const searchURL = searchParams.get('search')
+    
+    const [searchInput, setSearchInput] = useState(searchURL)
+    const [value] = useDebounce(searchInput, 500)
 
     useEffect(()=>{
         setSearchParams({page: `${pageURL || 1}`, search: `${value}`});
@@ -28,7 +25,7 @@ export const SearchField:React.FC = () :JSX.Element => {
                 fullWidth 
                 label={'search'}
                 value={searchInput}
-                onChange={(e)=>{dispatch(searchSlice.actions.searchChange(e.target.value))}}
+                onChange={(e)=>{setSearchInput(e.target.value)}}
                 margin="dense"
             ></TextField>
         </div>
