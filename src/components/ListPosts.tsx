@@ -11,8 +11,9 @@ export const ListPosts:React.FC = () :JSX.Element => {
     const searchURL = searchParams.get('search') || ''
     
     const {data, isError, isLoading} = newsAPI.useGetNewsQuery({query: searchURL, page: pageURL-1})
-    
-
+    if(isLoading){
+        <CircularProgress disableShrink/>
+    }
     if(!data){
         return(
             <Box className="ListPosts">
